@@ -1,1 +1,47 @@
 @import "variables.less";
+
+.js-slider {
+
+	overflow:hidden;
+	position:relative;
+	width:960px;
+	height:600px;
+
+
+	.js-wrapper {
+
+		position: relative;
+		z-index:10;
+
+		li {
+			list-style:none;
+			float:left;		
+		}
+	}
+}
+
+.slider-nav {
+
+	position:relative;
+	height:0;
+	margin-top:-300px;
+	
+	.js-nav {
+		z-index:20;
+		position:absolute;
+		top:50%;
+
+		display:block;
+		background:red;
+
+		&.prev {
+			left:0px;
+			right:auto;
+		}
+
+		&.next {
+			left:auto;
+			right:0px;
+		}
+	}
+}
