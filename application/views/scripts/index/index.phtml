@@ -6,13 +6,9 @@ function callbackFacebook() {
 			url: '/user/fbme',
 			data: 'mail=' + json.data.email,
 			success: function(data) {
-				if (data == 'ok')
-				{
+				if (data == 'ok') {
 					window.location.href = '/setup';
-				}
-				else
-				{
-					alert(data);
+				} else {
 					$('div#connect, .home-slider').slideUp('fast')
 					$('#register').slideDown('fast')
 					$('#register_nom').val(json.data.last_name)
@@ -63,7 +59,6 @@ $(document).ready(function() {
 	</div>
 
 	<div>
-		<p>C'est parti :</p>
 		<div id="connect" style="text-align: center; margin-top: 10px">
 			<a href="#">
 				<img src="/img/fbconnect.png" alt="facebook connect"/>
