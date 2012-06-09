@@ -21,15 +21,44 @@ $(document).ready(function() {
 </script>
 
 <div class="container">
-	Carousel de présentation de Jérôme et Ginette	
-	<img src="http://placehold.it/960x400" />
-</div>
+	
+	Carousel de présentation de Jérôme et Ginette		
 
-<div id="connect" style="text-align: center; margin-top: 10px">
-	<a href="#">
-		<img src="/img/fbconnect.png" alt="facebook connect"/>
-	</a>
-</div>
-<div id="register" style="display: none">
-	<?php echo $this->partial('index/register.phtml'); ?>
+	<div class="home-slider row">
+
+		<div class="js-slider">
+			<ul class="js-wrapper">
+				<li class="slide"><img src="http://placehold.it/960x600" /></li>
+				<li class="slide"><img src="http://placehold.it/960x600" /></li>
+				<li class="slide"><img src="http://placehold.it/960x600" /></li>
+				<li class="slide"><img src="http://placehold.it/960x600" /></li>
+			</ul>
+		</div>
+
+		<div class="slider-nav">
+			<a class="prev js-nav">prev</a>
+			<a class="next js-nav">next</a>
+
+			<ul class="js-bullets">
+				<li class="bullet"></li>
+				<li class="bullet"></li>
+				<li class="bullet"></li>
+				<li class="bullet"></li>
+			</ul>
+		</div>	
+
+	</div>
+
+	<div>
+		<p>C'est parti :</p>
+		<div id="connect" style="text-align: center; margin-top: 10px">
+			<a href="#">
+				<img src="/img/fbconnect.png" alt="facebook connect"/>
+			</a>
+		</div>
+		<div id="register" style="display: none">
+			<?php echo $this->partial('index/register.phtml'); ?>
+		</div>
+	</div>
+
 </div>
