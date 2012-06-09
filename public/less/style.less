@@ -1,5 +1,9 @@
 @import "variables.less";
 
+.home-slider {
+	position:relative;
+}
+
 .js-slider {
 
 	overflow:hidden;
@@ -22,9 +26,11 @@
 
 .slider-nav {
 
-	position:relative;
+	position:absolute;
+	top:50%;
 	height:0;
-	margin-top:-300px;
+
+	width:960px;
 	
 	.js-nav {
 		z-index:20;
@@ -42,6 +48,35 @@
 		&.next {
 			left:auto;
 			right:0px;
+		}
+	}
+
+	.js-bullets {
+
+		z-index:20;
+		position:relative;
+		top:270px;
+		left:50%;
+
+		width:400px;
+		margin-left:-60px;
+
+		.bullet {
+
+			display:block;
+			position:relative;
+
+			float:left;
+			width:20px;
+			height:20px;
+
+			margin-right:10px;
+
+			background:red;
+
+			&.active {
+				background-color: green;
+			}
 		}
 	}
 }
