@@ -64,6 +64,23 @@ $(window).load(function() {
 				$("form.js-setup .js-date").show();				
 			}
 		});
+
+
+		$(".js-interest").delegate(".domain", "change", function() {
+
+			if( $(this).val() == -1 ) {		
+				$(this).parents(".span6").find(".content").hide();
+			} else {								
+				// show the content input
+				$(this)
+					.parents(".span6")
+					.find(".content")
+						.show()
+						.find(":input[type=text]")
+							.attr("placeholder", $(this).find(":selected").data("placeholder") );
+			}
+
+		});
 	}
 
 
