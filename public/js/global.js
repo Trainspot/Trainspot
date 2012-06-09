@@ -21,7 +21,7 @@ $(window).load(function() {
 
 
 		// Slider's commands
-		$(".slider-nav").delegate("a", "click", function() {
+		$(".slider-nav").delegate("a,li", "click", function() {
 			
 			// Next slide
 			if( $(this).hasClass("next") ) {
@@ -29,9 +29,27 @@ $(window).load(function() {
 			// Previous slide
 			} else if( $(this).hasClass("prev") ) {
 				$(".js-slider").data("µSlide").slideTo("previous");
+
+			// Bullet na
+			} else if( $(this).hasClass("bullet") ) {
+				$(".js-slider").data("µSlide").slideTo( $(this).index() );
 			}
 
-		})
+		});
+
+		// Slider callback
+		$(".js-slider").bind("after-slide", function(object, index) {
+
+			// Active bullet
+			$(".slider-nav .bullet").removeClass("active").eq(index).addClass("active");
+			
+			// Next and prev buttons
+			if(index == 0) $(".slider-nav .prev").hide();
+			else $(".slider-nav .prev").show();
+
+			if(index == 3) $(".slider-nav .next").hide();
+			else $(".slider-nav .next").show();
+		});
 
 	}
 
