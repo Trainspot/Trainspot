@@ -1,8 +1,8 @@
 <?php
 
-class TUser extends Zend_Db_Table_Abstract {
+class User extends Zend_Db_Table_Abstract {
 
-    protected $_name = 'user';
+    protected $_name = 'User';
     protected $_primary = 'id_user';
     protected $_sequence = true;
 
@@ -10,7 +10,7 @@ class TUser extends Zend_Db_Table_Abstract {
     {
         $data = $this->fetchAll(
                 $this->select()
-                     ->where('mail = ?', $mail)
+                     ->where('email = ?', $mail)
         )->current();
         return $data;
     }

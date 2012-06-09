@@ -1,0 +1,7 @@
+<div class="ui-state-error"><?php echo (isset($this->data['msg']) ? $this->data['msg'] : $this->message); ?></div>
+<div>
+    <?php if (isset($this->exception)): ?>
+        <?php echo $this->exception->getMessage(); ?>
+        <?php echo $this->exception->getTraceAsString(); ?>
+    <?php endif; ?>
+</div>

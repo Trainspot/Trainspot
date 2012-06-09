@@ -1,15 +1,25 @@
 <script type="text/javascript">
 function callbackFacebook() {
-	alert('ok');
+	wsh.exec('_facebook -me', function(json) {
+		console.log(json);
+		$('div#connect').slideUp('fast');
+		$('#register').slideDown('fast');
+		$('#register_nom').val(json.data.last_name)
+		$('#register_prenom').val(json.data.first_name);
+		$('#register_date_birth').val(json.data.birthday);
+		$('#register_mail').val(json.data.email)
+	})
 }
 $(document).ready(function() {
 	$('#connect a').click(function() {
-
 		wsh.exec('oauth -provider facebook', function(json) {
 			$('body').append(json.view);
 			syncSetCallback(callbackFacebook);
 		});
-	})
+	});
 });
 </script>
-<p id="connect" style="text-align: center"><a href="#"><img src="/images/fbconnect.png" alt="facebook connect"/></a></p>
+<div id="connect" style="text-align: center"><a href="#"><img src="/images/fbconnect.png" alt="facebook connect"/></a></div>
+<div id="register" style="display: none">
+	<?php echo $this->partial('index/register.phtml'); ?>
+</div>
