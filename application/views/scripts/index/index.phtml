@@ -1,26 +1,38 @@
-<script type="text/javascript">
-	function callbackFacebook() {
-		alert('ok');
-	}
-
-	$(document).ready(function() {
-		$('#connect a').click(function() {
-
-			wsh.exec('oauth -provider facebook', function(json) {
-				$('body').append(json.view);
-				syncSetCallback(callbackFacebook);
-			});
-		})
-	});
-</script>
 
 <div class="container">
-	Carousel de présentation de Jérôme et Ginette	
-	<img src="http://placehold.it/960x400" />
-</div>
+	
+	Carousel de présentation de Jérôme et Ginette		
 
-<p id="connect" style="text-align: center">
-	<a href="#">
-		<img src="/img/fbconnect.png" alt="facebook connect"/>
-	</a>
-</p>
+	<div class="home-slider row">
+
+		<div class="js-slider">
+			<ul class="js-wrapper">
+				<li class="slide"><img src="http://placehold.it/960x600" /></li>
+				<li class="slide"><img src="http://placehold.it/960x600" /></li>
+				<li class="slide"><img src="http://placehold.it/960x600" /></li>
+				<li class="slide"><img src="http://placehold.it/960x600" /></li>
+			</ul>
+		</div>
+
+		<div class="slider-nav">
+			<a class="prev js-nav">prev</a>
+			<a class="next js-nav">next</a>
+
+			<ul class="js-bullets">
+				<li class="bullet"></li>
+				<li class="bullet"></li>
+				<li class="bullet"></li>
+				<li class="bullet"></li>
+			</ul>
+		</div>	
+
+	</div>
+
+	<p style="">
+		C'est parti :
+		<a id="connect">
+			<img src="/img/fbconnect.png" alt="facebook connect"/>
+		</a>
+	</p>
+
+</div>
