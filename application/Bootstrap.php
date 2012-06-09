@@ -12,6 +12,26 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         Zend_Registry::set('static_salt', 'p42sds54f5');
     }
 
+    protected function _initCache() {
+        $frontendOptions = array(
+           'lifetime' => 60000,
+           'automatic_serialization' => true
+        );
+
+        $backendOptions = array(
+            'cache_dir' => '../tmp/'
+        );
+
+        $cache = Zend_Cache::factory('Core',
+                                     'File',
+                                     $frontendOptions,
+                                     $backendOptions);
+
+        Zend_Registry::set('cache', $cache);
+
+        Zend_Db_Table_Abstract::setDefaultMetadataCache($cache);
+    }
+
     protected function _initRouter() {
         $front = $this->bootstrap('FrontController')->getResource('FrontController');
         $router = $front->getRouter();
@@ -41,6 +61,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         Zend_Db_Table::setDefaultAdapter($db);
         Zend_Registry::set('dba', $db);
         return $db;
+    }
+
+    protected function _initWebshell() {
+        require_once APPLICATION_PATH . '/../library/Webshell.php';
+        $webshell = Webshell::getInstance();
+        $webshell->init("47844ded8999967dae45662d1e8c449a");
+        $webshell->setUserId(session_id());
     }
 }
 
