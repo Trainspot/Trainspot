@@ -10,6 +10,42 @@ class UserController extends Zend_Controller_Action
         
     }
 
+    public function fbmeAction() {
+        require_once 'Webshell.php';
+        $wsh = Webshell::getInstance();
+        $mail = $this->_getParam('mail');
+        require_once '../application/models/tables/User.php';
+        $user = new User();
+        $verif = $user->getByMail($mail);
+        if ($verif)
+        {
+            $this->login($mail);
+            die('ok');
+        }
+        else
+            die('nok');
+    }
+
+    public function login($mail) {
+        $auth = Zend_Auth::getInstance();
+        $dbAdapter = Zend_Registry::get('dba');
+        $authAdapter = new Zend_Auth_Adapter_DbTable($dbAdapter);
+        $authAdapter->setTableName('User');
+        $authAdapter->setIdentityColumn('email');
+        $authAdapter->setCredentialColumn('email');
+        $authAdapter->setIdentity($mail);
+        $authAdapter->setCredential($mail);
+
+        $isAuthenticate = $auth->authenticate($authAdapter);
+        if (!$isAuthenticate->isValid()) {
+            $this->view->error = true;
+            $this->view->errorMsg = $isAuthenticate->getMessages();
+            return false;
+        } else {
+            $data = $authAdapter->getResultRowObject(null, 'pass');
+            $auth->getStorage()->write($data);
+        }
+    }
     /**
      * action body
      */
@@ -19,6 +55,10 @@ class UserController extends Zend_Controller_Action
         $nom = $this->_getParam('nom');
         $prenom = $this->_getParam('prenom');
         $ddn = $this->_getParam('ddn');
+        $this->view->email = $mail;
+        $this->view->nom = $nom;
+        $this->view->prenom = $prenom;
+        $this->view->ddn = $ddn;
         if ($mail == '' || $nom == '' || $prenom == '' || $ddn == '')
         {
             $this->view->error = true;
@@ -43,7 +83,10 @@ class UserController extends Zend_Controller_Action
                     'date_naissance' => $ddn
                 ));
                 if ($ok)
+                {
                     $this->view->error = false;
+                    $this->login($mail);
+                }
                 else
                 {
                     $this->view->error = true;

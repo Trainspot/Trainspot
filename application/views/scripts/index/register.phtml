@@ -1,19 +1,19 @@
 <form action="/user/register" method="POST" name="register_form">
 	<p>
 		<label for="register_prenom">Prénom : </label>
-		<input type="text" name="prenom" id="register_prenom" />
+		<input type="text" name="prenom" id="register_prenom" value="<?php echo $this->prenom; ?>" />
 	</p>
 	<p>
 		<label for="register_nom">Nom : </label>
-		<input type="text" name="nom" id="register_nom" />
+		<input type="text" name="nom" id="register_nom" value="<?php echo $this->nom; ?>" />
 	</p>
 	<p>
 		<label for="register_mail">Email : </label>
-		<input type="mail" name="mail" id="register_mail" />
+		<input type="mail" name="mail" id="register_mail" value="<?php echo $this->email; ?>" />
 	</p>
 	<p>
 		<label for="register_date_birth">Date de naissance</label>
-		<input type="text" name="ddn" id="register_date_birth" />
+		<input type="text" name="ddn" id="register_date_birth" value="<?php echo $this->ddn; ?>" />
 	</p>
 	<button>Inscription !</button>
 </form>

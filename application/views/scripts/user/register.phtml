@@ -1,6 +1,11 @@
 <?php if ($this->error): ?>
 	<p class="alert alert-error"><?php echo $this->errorMsg; ?></p>
+	<?php echo $this->partial('index/register.phtml', array(
+		'email' => $this->email,
+		'prenom' => $this->prenom,
+		'nom' => $this->nom,
+		'ddn' => $this->ddn
+	)) ?>
 <?php else: ?>
 	<p class="success">Fellicitation, votre compte est maintenant créé</p>
-	<button>Connexion</button>
 <?php endif; ?>

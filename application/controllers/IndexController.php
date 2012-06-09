@@ -16,5 +16,11 @@ class IndexController extends Zend_Controller_Action
     public function indexAction()
     {
     }
+    public function registerAction() {
+        $this->view->mail = $this->_getParam('mail');
+        $this->view->nom = $this->_getParam('nom');
+        $this->view->prenom = $this->_getParam('prenom');
+        $this->view->ddn = $this->_getParam('ddn');
+    }
 }
 ?>

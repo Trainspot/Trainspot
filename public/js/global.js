@@ -8,6 +8,8 @@ $(window).load(function() {
 
 
 	function bindEvents() {
+		
+		$(".datepicker" ).datepicker();
 
 		$('#connect').click(function(event) {			
 
@@ -51,6 +53,17 @@ $(window).load(function() {
 			else $(".slider-nav .next").show();
 		});
 
+
+		$("form.js-setup").delegate(":input[name=regulier]", "change", function() {
+			
+			if( $(this).is(":checked") ) {
+				$("form.js-setup .js-frequence").show();
+				$("form.js-setup .js-date").hide();
+			} else {
+				$("form.js-setup .js-frequence").hide();
+				$("form.js-setup .js-date").show();				
+			}
+		});
 	}
 
 

@@ -1,14 +1,28 @@
 <script type="text/javascript">
 function callbackFacebook() {
-	wsh.exec('_facebook -me', function(json) {
-		console.log(json);
-		$('div#connect').slideUp('fast');
-		$('#register').slideDown('fast');
-		$('#register_nom').val(json.data.last_name)
-		$('#register_prenom').val(json.data.first_name);
-		$('#register_date_birth').val(json.data.birthday);
-		$('#register_mail').val(json.data.email)
-	})
+
+    wsh.exec('_facebook -me', function(json) {
+		$.ajax({
+			url: '/user/fbme',
+			data: 'mail=' + json.data.email,
+			success: function(data) {
+				if (data == 'ok')
+				{
+					window.location.href = '/setup';
+				}
+				else
+				{
+					alert(data);
+					$('div#connect, .home-slider').slideUp('fast')
+					$('#register').slideDown('fast')
+					$('#register_nom').val(json.data.last_name)
+					$('#register_prenom').val(json.data.first_name)
+					$('#register_date_birth').val(json.data.birthday)
+					$('#register_mail').val(json.data.email)
+				}
+			}
+		});
+	});
 }
 $(document).ready(function() {
 	$('#connect a').click(function() {
@@ -16,16 +30,15 @@ $(document).ready(function() {
 			$('body').append(json.view);
 			syncSetCallback(callbackFacebook);
 		});
+		return false;
 	});
 });
 </script>
 
 <div class="container">
-	
-	Carousel de présentation de Jérôme et Ginette		
 
 	<div class="home-slider row">
-
+		<p>Carousel de présentation de Jérôme et Ginette</p>
 		<div class="js-slider">
 			<ul class="js-wrapper">
 				<li class="slide"><img src="http://placehold.it/960x600" /></li>
