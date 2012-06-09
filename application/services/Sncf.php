@@ -26,10 +26,10 @@ class Sncf
 			$tmp2 = array();
 			foreach ($data as $d)
 			{
-				if ( isset($d[1], $d[3], $d[9], $d[10]) && ! in_array($d[1], $tmp))
+				if ( isset($d[1], $d[3], $d[9], $d[10], $d[0]) && ! in_array($d[1], $tmp))
 				{
 					$tmp[] = $d[1];
-					$tmp2[] = array($d[1], $d[3], $d[9], $d[10]);
+					$tmp2[] = array($d[1], $d[3], $d[9], $d[10], $d[0]);
 				}
 			}
 			$data = $tmp2;
@@ -38,17 +38,27 @@ class Sncf
         return $data;
 	}
 
-	public function autocompleteGare($name)
+	public function prepareAutocomplete($name)
 	{
 		$namelen = strlen($name);
-		if ($namelen < 3)
+		if ($namelen < 1)
 			return array();
 
 		$gares = $this->getGares();
+
 		$gares = array_filter($gares, function($gare) use($name, $namelen) {
 			return strtolower(substr($gare[0], 0, $namelen)) == strtolower($name);
 		});
-
 		return $gares;
+	}
+
+	public function autocompleteGare($name) {
+		$gares = $this->prepareAutocompletion($name);
+		$data = array();
+		foreach ($gares as &$gare)
+		{
+			$data[] = $gare[0];
+		}
+
 	}
 }

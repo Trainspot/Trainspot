@@ -25,6 +25,37 @@ class UserController extends Zend_Controller_Action
         else
             die('nok');
     }
+    
+    public function setupAction() {
+        if ($this->getRequest()->isPost())
+        {
+            require_once '../application/services/Sncf.php';
+            require_once '../models/tables/'
+            $garedepart = $this->_getParam('gare-depart');
+            $garearrive = $this->_getParam('gare-arrivee');
+            $sncf = new Sncf();
+            $l = $sncf->prepareAutocomplete($garedepart);
+            $ligne = $l[4];
+            $timeh = $this->_getParam('depart-hour');
+            $timem = $this->_getParam('depart-min');
+            if ($garedepart == '' || $garearrive == '' || empty($ligne) || empty($timeh) || empty($timem))
+            {
+                //erreur
+            }
+            else
+            {
+                
+            }
+        }
+    }
+
+    public function autocompletegareAction() {
+        require_once '../application/services/Sncf.php';
+        $sncf = new Sncf();
+        $str = $this->_getParam('term');
+        $data = $sncf->autocompleteGare($str);
+        die(Zend_Json::encode($data));
+    }
 
     public function login($mail) {
         $auth = Zend_Auth::getInstance();
@@ -86,6 +117,7 @@ class UserController extends Zend_Controller_Action
                 {
                     $this->view->error = false;
                     $this->login($mail);
+                    $this->_redirect('/user/setup');
                 }
                 else
                 {
