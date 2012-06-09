@@ -1,0 +1,33 @@
+
+// Grays
+// -------------------------
+@black:                 #000;
+@grayDarker:            #222;
+@grayDark:              #333;
+@gray:                  #555;
+@grayLight:             #999;
+@grayLighter:           #eee;
+@white:                 #fff;
+
+.box-shadow(@style) {
+  		  box-shadow: @style;
+  -webkit-box-shadow: @style;
+  	 -moz-box-shadow: @style;
+  	   -o-box-shadow: @style;
+  	  -ms-box-shadow: @style;
+}
+
+.transition(@style) {
+  		  transition: @style;
+  -webkit-transition: @style;
+  	 -moz-transition: @style;
+  	   -o-transition: @style;
+  	  -ms-transition: @style;
+}
+
+
+
+body {
+	padding-top:60px;
+	background:repeat @white;
+}
