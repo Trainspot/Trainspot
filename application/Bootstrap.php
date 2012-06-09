@@ -8,10 +8,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         parent::run();
     }
 
-    protected function _initSalt() {
-        Zend_Registry::set('static_salt', 'p42sds54f5');
-    }
-
     protected function _initCache() {
         $frontendOptions = array(
            'lifetime' => 60000,
@@ -40,6 +36,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
     protected function _initReferer()
     {
         $session = new Zend_Session_Namespace('Default');
+        $session->tmp = md5(rand());
         if (isset($session->referer))
         {
             $referer = $session->referer;
