@@ -1,0 +1,86 @@
+<div class="container">
+	<form class="form-horizontal js-setup" method="POST">
+	    <fieldset class="row">
+		    <legend>Ajouter un trajet</legend>
+
+		    <div class="control-group">
+			    <label class="control-label" for="gare-depart">Gare de départ&nbsp;:</label>
+			    <div class="controls">
+				    <input type="text" class="text span3" id="gare-depart" name="gare-depart">				    
+			    </div>
+		    </div>
+		    <div class="control-group">
+			    <label class="control-label" for="gare-arrivee">Gare d'arrivée&nbsp;:</label>
+			    <div class="controls">
+				    <input type="text" class="text span3" id="gare-arrivee" name="gare-arrivee">				    
+			    </div>
+		    </div>
+
+		    <div class="control-group">  
+			    <div class="controls">
+			    	<label class="checkbox">
+			    		<input type="checkbox" name="regulier" class="pull-left" /> 
+			    		C'est un trajet régulier ?
+			    	</label>
+			    </div>
+		    </div>			    
+
+		    <div class="control-group js-frequence hide">
+			    <label class="control-label" for="frequence">Fréquence&nbsp;:</label>
+			    <div class="controls">    
+			    	<select name="frequence">
+			    		<option value="week">la semaine</option>
+			    		<option value="w-e">le week-end</option>
+			    		<option value="all">tous les jours</option>
+			    	</select>
+			    </div>
+		    </div>		
+
+		    <div class="control-group js-date">
+			    <label class="control-label" for="date">Date&nbsp;:</label>
+			    <div class="controls">    
+			    	<input type="input" class="text input-small datepicker" />
+			    </div>
+		    </div>		
+
+		    <div class="control-group">
+			    <label class="control-label" for="depart-hour">Heure de départ&nbsp;:</label>
+			    <div class="controls">
+			    	<select name="depart-hour" class="input-small">
+			    		<?php for($i=0; $i<=23; $i++) : ?>
+			    			<option value="<?=$i?>"><?=$i?></option>
+			    		<?php endfor; ?>
+			    	</select>		
+			    	<select name="depart-min" class="input-small">
+			    		<?php for($i=0; $i<=59; $i++) : ?>
+			    			<option value="<?=$i?>"><?=$i?></option>
+			    		<?php endfor; ?>
+			    	</select>	    
+			    </div>
+		    </div>
+
+		    <div class="control-group">
+			    <label class="control-label" for="heure-arrivee">Heure d'arrivée&nbsp;:</label>
+			    <div class="controls">
+			    	<select name="arrivee-hour" class="input-small">
+			    		<?php for($i=0; $i<=23; $i++) : ?>
+			    			<option value="<?=$i?>"><?=$i?></option>
+			    		<?php endfor; ?>
+			    	</select>		
+			    	<select name="arrivee-min" class="input-small">
+			    		<?php for($i=0; $i<=59; $i++) : ?>
+			    			<option value="<?=$i?>"><?=$i?></option>
+			    		<?php endfor; ?>
+			    	</select>			    
+			    </div>
+		    </div>
+
+		    <div class="form-actions">
+		    	<button class="btn btn-primary" type="submit">Suivant</button>
+		    	<button class="btn">Ajouter un autre trajet</button>
+		    </div>
+
+	    </fieldset>
+
+	</form>
+</div>
