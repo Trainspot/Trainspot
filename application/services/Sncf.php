@@ -53,12 +53,12 @@ class Sncf
 	}
 
 	public function autocompleteGare($name) {
-		$gares = $this->prepareAutocompletion($name);
+		$gares = $this->prepareAutocomplete($name);
 		$data = array();
-		foreach ($gares as &$gare)
+		foreach ($gares as $gare)
 		{
 			$data[] = $gare[0];
 		}
-
+		return $data;
 	}
 }

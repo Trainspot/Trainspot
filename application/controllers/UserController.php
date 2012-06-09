@@ -30,7 +30,7 @@ class UserController extends Zend_Controller_Action
         if ($this->getRequest()->isPost())
         {
             require_once '../application/services/Sncf.php';
-            require_once '../models/tables/'
+//            require_once '../models/tables/';
             $garedepart = $this->_getParam('gare-depart');
             $garearrive = $this->_getParam('gare-arrivee');
             $sncf = new Sncf();
