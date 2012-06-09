@@ -8,8 +8,6 @@ class TUser extends Zend_Db_Table_Abstract {
 
     public function getByMail($mail)
     {
-        $cache = Zend_Registry::get('cache');
-        $cache_id = 'user_getbymail_' . md5($mail);
         $data = $this->fetchAll(
                 $this->select()
                      ->where('mail = ?', $mail)
@@ -27,18 +25,6 @@ class TUser extends Zend_Db_Table_Abstract {
         return $data;
     }
   
-    public function getByName($name)
-    {
-
-        $data = $this->fetchAll(
-                $this->select()
-                     ->where('nickname = ?', $name))->current();
-
-        else
-            $data = $cache->load($cache_id);
-        return $data;
-    }
-
     public function insert(array $data)
     {
         return parent::insert($data);

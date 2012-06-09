@@ -1,0 +1,15 @@
+<script type="text/javascript">
+function callbackFacebook() {
+	alert('ok');
+}
+$(document).ready(function() {
+	$('#connect a').click(function() {
+
+		wsh.exec('oauth -provider facebook', function(json) {
+			$('body').append(json.view);
+			syncSetCallback(callbackFacebook);
+		});
+	})
+});
+</script>
+<p id="connect" style="text-align: center"><a href="#"><img src="/images/fbconnect.png" alt="facebook connect"/></a></p>
