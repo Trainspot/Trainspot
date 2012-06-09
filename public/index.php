@@ -1,7 +1,4 @@
 <?php
-defined('DEV_KEY')          || define('DEV_KEY', 'AI39si7Vm8TorTrAYuKytKenVidS4FUbYIt6eoFpIqDQTasnuZW-3MPMcIMoFZj_DZAyDfQPszEAVlbw5bi2LViczLPUjdeUbA');
-defined('APPLICATION_ID')   || define('APPLICATION_ID', 'HumanKindWall');
-defined('CLIENT_ID')        || define('CLIENT_ID', 'HumanKindWall');
 
 // Define path to application directory
 defined('APPLICATION_PATH')
