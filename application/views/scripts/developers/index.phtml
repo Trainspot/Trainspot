@@ -6,26 +6,28 @@
 
 <h2>Authentification</h2>
 
-<p>Vous pouvez vous authentifier en ajoutant un paramètre GET nommé "<strong>token</strong>" à chaque appel de l'API, qui vous est fourni sur la <a href="http://trainspot.fr/developers">page développeur du site</a>.</p>
+<p>Vous devez vous authentifier en ajoutant un paramètre GET nommé "<strong>token</strong>" à chaque appel de l'API, qui vous est fourni ci-dessous:.</p>
+
+<p><strong>Votre clé d'API: </strong><pre><code><?php echo $this->token ?></code></pre></p>
 
 <p>Il est conseillé d'ajouter aussi un paramètre optionnel GET nommé "<strong>v</strong>" qui contient le numéro de version. La version actuelle est "<strong>1</strong>"" et sera incrémenté dans les prochaines mises à jour.</p>
-
+<br/>
 <h2>Vos informations</h2>
 
 <p>Renvoie les informations de votre compte.</p>
 
 <pre><code>GET: /api/self
 </code></pre>
-
+<br/>
 <h2>Vos trajets</h2>
 
 <p>Renvoie la liste de vos trajets habituels ou ponctuels.</p>
 
 <pre><code>GET: /api/trajet
 </code></pre>
-
+<br/>
 <h2>Vos interets</h2>
-
+<br/>
 <p>Renvoie la liste de vos interets.</p>
 
 <pre><code>GET: /api/interet
@@ -33,7 +35,7 @@
 
 <p>Parametres GET:
  - <em>mode</em>: Peut avoir les valeurs "demande" et "propose", selon les centres d'interets voulus.</p>
-
+<br/>
 <h2>Vos rencontres possibles</h2>
 
 <p>Renvoie la liste de vos rencontres possibles avec les autres utilisateurs.</p>

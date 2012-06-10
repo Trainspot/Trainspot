@@ -25,7 +25,7 @@ class ApiController extends Zend_Controller_Action
             die("{error: 'true', errorMsg: 'Token invalide'}");
         } else {
             Zend_Registry::set('api', true);
-            $data = $authAdapter->getResultRowObject(null, 'token');
+            $data = $authAdapter->getResultRowObject(null);
             $auth->getStorage()->write($data);
         }
 
