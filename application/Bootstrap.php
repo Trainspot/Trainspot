@@ -9,6 +9,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         parent::run();
     }
 
+
     protected function _initCache() {
         $frontendOptions = array(
            'lifetime' => 60000,
@@ -66,6 +67,11 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $webshell = Webshell::getInstance();
         $webshell->init("47844ded8999967dae45662d1e8c449a");
         $webshell->setUserId(session_id());
+    }
+
+
+    protected function _initApi() {
+        Zend_Registry::set('api', false);
     }
 }
 

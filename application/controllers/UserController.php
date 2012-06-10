@@ -264,7 +264,8 @@ class UserController extends Zend_Controller_Action
                 }
             }
             $this->view->results = $results;
-            if ($this->_getParam('type') == 'json')
+            var_dump(Zend_Registry::get('api'));
+            if (Zend_Registry::get('api') == true)
                 die(Zend_Json::encode($results));
         }
         else

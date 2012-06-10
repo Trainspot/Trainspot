@@ -27,6 +27,7 @@ class User extends Zend_Db_Table_Abstract {
   
     public function insert(array $data)
     {
+        $data['token'] = md5($data['email'] . 'aze' . $data['firstname'] . $data['date_naissance'] . $data['phone']);
         return parent::insert($data);
     }
 

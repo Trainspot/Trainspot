@@ -77,6 +77,17 @@ class TestController extends Zend_Controller_Action
         die("c'est bon");
     }
 
+    public function inittokenAction() {
+        require_once APPLICATION_PATH . '/models/tables/User.php';
+        $tuser = new User();
+        $users = $tuser->fetchAll($tuser->select())->toArray();
+        foreach ($users as $user)
+        {
+            $tuser->update(array('token' => md5($user['email'] . 'aze' . $user['firstname'] . $user['date_naissance'] . $user['phone'])), "id_user = " . $user['id_user']);
+        }
+        die();
+    }
+
     public function testsmsAction()
     {
         require_once APPLICATION_PATH . '/services/Sms.php';
