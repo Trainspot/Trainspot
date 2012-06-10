@@ -29,6 +29,9 @@ class UserController extends Zend_Controller_Action
     public function trajetAction() {
         if ( ! Zend_Auth::getInstance()->hasIdentity())
             $this->_redirect('/');
+
+        
+
         if ($this->getRequest()->isPost())
         {
             require_once '../application/services/Sncf.php';

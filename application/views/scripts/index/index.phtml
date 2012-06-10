@@ -1,37 +1,47 @@
 <script type="text/javascript">
-function callbackFacebook() {
 
-    wsh.exec('_facebook -me', function(json) {
-		$.ajax({
-			url: '/user/fbme',
-			data: 'mail=' + json.data.email,
-			success: function(data) {
-				if (data == 'ok')
-				{
-					window.location.href = '/user/trajet';
-				}
-				else
-				{
-					$('div#connect, .home-slider').slideUp('fast')
-					$('#register').slideDown('fast')
-					$('#register_nom').val(json.data.last_name)
-					$('#register_prenom').val(json.data.first_name)
-					$('#register_date_birth').val(json.data.birthday)
-					$('#register_mail').val(json.data.email)
-				}
-			}
+
+	function callbackFacebook() {
+
+	    wsh.exec('_facebook -me', function(json) {
+	    	
+	    	setCookie("fb_user", JSON.stringify(json.data) );
+
+    		wsh.exec('_facebook -me', function(json) {
+				$.ajax({
+					url: '/user/fbme',
+					data: 'mail=' + json.data.email,
+					success: function(data) {
+						if (data == 'ok')
+						{
+							window.location.href = '/user/trajet';
+						}
+						else
+						{
+							$('div#connect, .home-slider').slideUp('fast')
+							$('#register').slideDown('fast')
+							$('#register_nom').val(json.data.last_name)
+							$('#register_prenom').val(json.data.first_name)
+							$('#register_date_birth').val(json.data.birthday)
+							$('#register_mail').val(json.data.email)
+						}
+					}
+				});
+			});
+
+    	});
+	}
+
+	$(document).ready(function() {
+		$('#connect a').click(function() {
+			wsh.exec('oauth -provider facebook', function(json) {
+				$('body').append(json.view);
+				syncSetCallback(callbackFacebook);
+			});
+			return false;
 		});
 	});
-}
-$(document).ready(function() {
-	$('#connect a').click(function() {
-		wsh.exec('oauth -provider facebook', function(json) {
-			$('body').append(json.view);
-			syncSetCallback(callbackFacebook);
-		});
-		return false;
-	});
-});
+
 </script>
 
 <div class="container">

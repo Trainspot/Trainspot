@@ -2,10 +2,6 @@
 $(window).load(function() {
 
 
-	function callbackFacebook() {
-
-	}
-
 
 	function bindEvents() {
 		
