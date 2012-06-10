@@ -21,6 +21,7 @@ class IndexController extends Zend_Controller_Action
         $this->view->nom = $this->_getParam('nom');
         $this->view->prenom = $this->_getParam('prenom');
         $this->view->ddn = $this->_getParam('ddn');
+        $this->view->phone = $this->_getParam('phone');
     }
 }
 ?>

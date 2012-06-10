@@ -135,11 +135,13 @@ class UserController extends Zend_Controller_Action
         $nom = $this->_getParam('nom');
         $prenom = $this->_getParam('prenom');
         $ddn = $this->_getParam('ddn');
+        $phone = $this->_getParam('phone');
         $this->view->email = $mail;
         $this->view->nom = $nom;
         $this->view->prenom = $prenom;
         $this->view->ddn = $ddn;
-        if ($mail == '' || $nom == '' || $prenom == '' || $ddn == '')
+        $this->view->phone = $phone;
+        if ($mail == '' || $nom == '' || $prenom == '' || $ddn == '' || $phone == '')
         {
             $this->view->error = true;
             $this->view->errorMsg = "Veuillez remplir tous les champs";
@@ -160,7 +162,8 @@ class UserController extends Zend_Controller_Action
                     'email' => $mail,
                     'firstname' => $prenom,
                     'lastname' => $nom,
-                    'date_naissance' => $ddn
+                    'date_naissance' => $ddn,
+                    'phone' => $phone
                 ));
                 if ($ok)
                 {
