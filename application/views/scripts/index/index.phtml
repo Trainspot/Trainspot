@@ -14,11 +14,11 @@
 					success: function(data) {
 						if (data == 'ok')
 						{
-							window.location.href = '/user/trajet';
+							window.location.href = '/user/';
 						}
 						else
 						{
-							$('div#connect, .home-slider').slideUp('fast')
+							$('.signin, .home-slider, ').slideUp('fast')
 							$('#register').slideDown('fast')
 							$('#register_nom').val(json.data.last_name)
 							$('#register_prenom').val(json.data.first_name)
@@ -78,9 +78,9 @@
 				Connectez vous avec Facebook
 			</a>
 		</div>
-		<div id="register" style="display: none">
-			<?php echo $this->partial('index/register.phtml'); ?>
-		</div>
 	</div>
 
+	<div id="register" style="display: none">
+		<?php echo $this->partial('index/register.phtml'); ?>
+	</div>
 </div>

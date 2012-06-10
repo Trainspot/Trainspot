@@ -13,9 +13,9 @@ class IndexController extends Zend_Controller_Action
     /**
      * action body
      */
-    public function indexAction()
-    {
+    public function indexAction() {
     }
+
     public function registerAction() {
         $this->view->mail = $this->_getParam('mail');
         $this->view->nom = $this->_getParam('nom');

@@ -75,6 +75,24 @@
 
         <?php $controllerName = Zend_Controller_Front::getInstance()->getRequest()->getControllerName(); ?>
 
+        <?php if( Zend_Auth::getInstance()->hasIdentity() ) : ?>
+
+            <div class="pull-right dropdown" id="user-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="icon-user"></i> <?= Zend_Auth::getInstance()->getIdentity()->firstname ?>
+                    <b class="caret"></b>
+                </a>
+
+                <ul class="dropdown-menu">
+                    <li><a href="/user">Mon profil</a></li>
+                    <li><a href="/user/trajet">Mes trajets</a></li>
+                    <li><a href="/user/interest">Mes intérêts</a></li>
+                </ul>
+            </div>
+
+        <?php endif; ?>
+
+
         <?php if( $controllerName == "index" ) : ?>
 
            <header>
