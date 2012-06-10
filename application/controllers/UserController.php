@@ -62,7 +62,7 @@ class UserController extends Zend_Controller_Action
             $timeh = $this->_getParam('depart-hour');
             $timem = $this->_getParam('depart-min');
             $timestamp = mktime($timeh, $timem, 0);
-            if ($garedepart == '' || $garearrive == '' || empty($ligne) || empty($timeh) || empty($timem))
+            if ($garedepart == '' || $garearrive == '' || empty($ligne) || $timeh == null || $timem == null)
             {
                 $this->_redirect('/error/error');
             }
@@ -264,9 +264,6 @@ class UserController extends Zend_Controller_Action
                 }
             }
             $this->view->results = $results;
-            var_dump(Zend_Registry::get('api'));
-            if (Zend_Registry::get('api') == true)
-                die(Zend_Json::encode($results));
         }
         else
         {
