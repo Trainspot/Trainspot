@@ -26,7 +26,9 @@ class UserController extends Zend_Controller_Action
             die('nok');
     }
     
-    public function setupAction() {
+    public function trajetAction() {
+        if ( ! Zend_Auth::getInstance()->hasIdentity())
+            $this->_redirect('/');
         if ($this->getRequest()->isPost())
         {
             require_once '../application/services/Sncf.php';
@@ -34,20 +36,31 @@ class UserController extends Zend_Controller_Action
             $garedepart = $this->_getParam('gare-depart');
             $garearrive = $this->_getParam('gare-arrivee');
             $sncf = new Sncf();
-            $l = $sncf->prepareAutocomplete($garedepart);
+            $l = array_shift($sncf->prepareAutocomplete($garedepart));
             $ligne = $l[4];
             $timeh = $this->_getParam('depart-hour');
             $timem = $this->_getParam('depart-min');
+            $timestamp = $timeh * 60 * 60 + $timem * 60;
             if ($garedepart == '' || $garearrive == '' || empty($ligne) || empty($timeh) || empty($timem))
             {
-                //erreur
+                $this->_redirect('/error/error');
             }
             else
             {
-                
+                require_once '../application/models/tables/Travel.php';
+                $travel = new Travel();
+                $travel->insert(array(
+                    'ligne' => $ligne,
+                    'gare_depart' => $garedepart,
+                    'gare_arrivee' => $garearrive,
+                    'flexible' => (($this->_getParam('regulier', 0) != 0) ? 1 : 0),
+                    'id_user' => Zend_Auth::getInstance()->getIdentity()->id_user
+                ));
+                $this->_redirect('/interest');
             }
         }
     }
+
 
     public function autocompletegareAction() {
         require_once '../application/services/Sncf.php';
@@ -117,7 +130,7 @@ class UserController extends Zend_Controller_Action
                 {
                     $this->view->error = false;
                     $this->login($mail);
-                    $this->_redirect('/user/setup');
+                    $this->_redirect('/user/trajet');
                 }
                 else
                 {
