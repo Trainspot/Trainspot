@@ -5,10 +5,9 @@ class UserController extends Zend_Controller_Action
     /**
      * Initialize action controller here
      */
-    public function init()
-    {
+    public function init() {
         
-    }
+    }    
 
     public function fbmeAction() {
         require_once 'Webshell.php';
@@ -27,6 +26,7 @@ class UserController extends Zend_Controller_Action
     }
     
     public function trajetAction() {
+
         if ( ! Zend_Auth::getInstance()->hasIdentity())
             $this->_redirect('/');
 
@@ -166,7 +166,7 @@ class UserController extends Zend_Controller_Action
                 {
                     $this->view->error = false;
                     $this->login($mail);
-                    $this->_redirect('/user/trajet');
+                    $this->_redirect('/user/');
                 }
                 else
                 {
@@ -210,11 +210,27 @@ class UserController extends Zend_Controller_Action
             die('ok');
         }
     }
+
     /**
      * action body
      */
     public function indexAction() {
 
     }
+
+    static public function getAge($user) {
+
+        $birthday = explode("/", $user->date_naissance);
+
+        $ageTime = mktime(0, 0, 0, $birthday[0], $birthday[1], $birthday[2]); // Get the person's birthday timestamp
+        $t = time(); // Store current time for consistency
+        $age = ($ageTime < 0) ? ( $t + ($ageTime * -1) ) : $t - $ageTime;
+        $year = 60 * 60 * 24 * 365;
+        $ageYears = $age / $year;
+
+        return floor($ageYears);
+
+    }
+
 }
 ?>
