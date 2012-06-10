@@ -68,13 +68,21 @@ class TestController extends Zend_Controller_Action
         die();
     }
 
-    public function clearcache()
+    public function clearcacheAction()
     {
         $cache = Zend_Registry::get('cache');
 
         $cache->clean(Zend_Cache::CLEANING_MODE_ALL);
 
         die("c'est bon");
+    }
+
+    public function testsmsAction()
+    {
+        require_once APPLICATION_PATH . '/services/Sms.php';
+        $sms = new Sms();
+        $sms->sendSms('Hello from bump', '0678374479');
+        die('ouki');
     }
 }
 ?>
