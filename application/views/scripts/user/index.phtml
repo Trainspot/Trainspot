@@ -26,5 +26,14 @@
 				<span class="badge">2</span> Quels sont vos trajets ?
 			</a>
 		</div>
+
+
+    	<?php foreach ($this->proposals as $proposal): ?>
+	    	<li class="span3">
+	    		<img src="/img/pic-want.png" class="" />
+	    		<?php echo '<strong>' . $proposal['title'] . '</strong> : ' . $proposal['desc']; ?>
+	    	</li>
+	    <?php endforeach; ?>
+	    
 	</div>
 </div>
