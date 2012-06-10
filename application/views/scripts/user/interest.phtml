@@ -28,7 +28,7 @@
 
 			    <ul class="my-interests unstyled">
 			    	<?php foreach ($this->needs as $need): ?>
-			    	<li><img src="http://placehold.it/30x25" class="" /><?php echo '<strong>' . $need['title'] . '</strong> : ' . $need['desc']; ?></li>
+			    	<li><img src="/img/pic-need.png" class="" /><?php echo '<strong>' . $need['title'] . '</strong> : ' . $need['desc']; ?></li>
 				    <?php endforeach; ?>
 			    </ul>
 
@@ -52,6 +52,12 @@
 			    	<option data-placeholder="Une recette" value="recette">Recette</option>
 			    	<option data-placeholder="Découvrir le métier de physicien" value="experience">Expérience profesionnelle</option>
 			    </select>
+
+			    <ul class="my-interests unstyled">
+			    	<?php foreach ($this->proposals as $proposal): ?>
+			    	<li><img src="/img/pic-want.png" class="" /><?php echo '<strong>' . $proposal['title'] . '</strong> : ' . $proposal['desc']; ?></li>
+				    <?php endforeach; ?>
+			    </ul>
 
 			    <div id="proposal-container" class="hide js-proposal content">
 			    	<input type="text" class="text span3" id="your-proposal-input" name="content-proposal" />

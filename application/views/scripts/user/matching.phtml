@@ -1,0 +1,18 @@
+<div>
+
+	<?php foreach($this->results as $result): ?>
+		<?php foreach ($result['interest'] as $interest): ?>
+		<div>
+			<span>
+				<?php echo $result['user']['firstname'] . ' ' . $result['user']['lastname']; ?>
+			</span>
+			<span><?php echo ($interest['need_proposal'] == 0 ? '<img src="/img/pic-want.png" />Propose' : '<img src="/img/pic-need.png" />Recherche') ?><br />
+				<?php echo $interest['title'] . ' : ' . $interest['desc']; ?>
+			</span>
+			<span>
+				<?php echo 'Rencontre à ' . $result['gare_rencontre'][0]; ?>
+			</span>
+		</div>
+		<?php endforeach; ?>
+	<?php endforeach; ?>
+</div>

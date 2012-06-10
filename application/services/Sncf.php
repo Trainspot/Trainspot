@@ -137,8 +137,8 @@ var_dump('pl');
 			{
 				$timestop = $stop["StopArrivalTime"];
 				$timestop = mktime($timestop['Hour'], $timestop['Minute']);
-				$difftime = abs(time() - $timestop);
-				if ($difftime < 60 * 30)
+				$difftime = abs($timestamp - $timestop);
+				if ($difftime < 60 * 10)
 					return true;
 			}
 		}
