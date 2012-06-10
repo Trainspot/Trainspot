@@ -12,7 +12,7 @@ ok - départs de trains (sur un trajet) dans une tranche horaire | jours/semaine
 
 class Sncf
 {
-	private $_timespan = 600;
+	private $_timespan = 900;
 
 	// returns [name, uic, lat, lng, ligne]
 	private function getGares()
