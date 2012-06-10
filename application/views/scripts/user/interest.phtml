@@ -1,7 +1,7 @@
 <div class="container">
 	<form class="form-horizontal js-interest" method="POST">
 	    <fieldset class="row">
-		    <legend>Définir ses intérêts</legend>
+		    <legend><a href="/user">Tableaun de bord</a> ‣ Définir ses intérêts</legend>
 
 		    <div class="span6">
 
@@ -55,6 +55,10 @@
 			    	<option data-placeholder="Une recette" value="recette">Recette</option>
 			    	<option data-placeholder="Découvrir le métier de physicien" value="experience">Expérience profesionnelle</option>
 			    </select>
+			    
+			    <div id="proposal-container" class="hide js-proposal content">
+			    	<input type="text" class="text span3" id="your-proposal-input" name="content-proposal" />
+			    </div>
 
 			    <ul class="my-interests unstyled list">
 			    	<?php foreach ($this->proposals as $proposal): ?>
@@ -65,9 +69,6 @@
 				    <?php endforeach; ?>
 			    </ul>
 
-			    <div id="proposal-container" class="hide js-proposal content">
-			    	<input type="text" class="text span3" id="your-proposal-input" name="content-proposal" />
-			    </div>
 
 
 			</div>
