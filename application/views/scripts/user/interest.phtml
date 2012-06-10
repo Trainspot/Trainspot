@@ -5,23 +5,24 @@
 
 		    <div class="span6">
 
-			    <div class="control-group">
-				    <label class="control-label" for="your-need">Vous cherchez&nbsp;:</label>
-				    
-				    <div class="controls">
-					    <select class="span3 domain" id="your-need" name="your-need">						    		
-					    	<option value="-1">Dans le domaine...</option>
-					    	<option data-placeholder="Une conversation en espagnol" value="jeu">Jeu</option>
-					    	<option data-placeholder="Une expérience du canada" value="langue">Langue</option>
-					    	<option data-placeholder="Un cours rapide de tricot" value="voyage">Voyage</option>
-					    	<option data-placeholder="Une partie de crapette" value="initiation">Initiation</option>
-					    	<option data-placeholder="Une recette" value="recette">Recette</option>
-					    	<option data-placeholder="Découvrir le métier de physicien" value="experience">Expérience profesionnelle</option>
-					    </select>
-				    </div>
-			    </div>
+		    	<h2><label for="your-need">Je cherche</label></h2>
 
-			    <div id="need-container" class="controls hide js-need content">
+			    <p class="note">
+			    	Faites comme Martin, <br />
+			    	cherchez des conversations en anglais
+			    </p>
+
+			    <select class="span3 domain" id="your-need" name="your-need">						    		
+			    	<option value="-1">Dans le domaine...</option>
+			    	<option data-placeholder="Une conversation en espagnol" value="langue">Langue</option>
+			    	<option data-placeholder="Une expérience du canada" value="voyage">Voyage</option>
+			    	<option data-placeholder="Une partie de crapette" value="jeu">Jeu</option>
+			    	<option data-placeholder="Un cours rapide de tricot" value="initiation">Initiation</option>
+			    	<option data-placeholder="Une recette" value="recette">Recette</option>
+			    	<option data-placeholder="Découvrir le métier de physicien" value="experience">Expérience profesionnelle</option>
+			    </select>
+
+			    <div id="need-container" class="hide js-need content">
 			    	<input type="text" class="text span3" id="your-need-input" name="content-need" />
 			    </div>
 
@@ -35,44 +36,37 @@
 
 		    <div class="span6">
 
-			    <div class="control-group">
-				    <label class="control-label" for="your-proposal">Vous proposez&nbsp;:</label>
-				    
-				    <div class="controls">
-					    <select class="span3 domain" id="your-proposal" name="your-proposal">		    		
-					    	<option value="-1">Dans le domaine...</option>
-					    	<option data-placeholder="Une conversation en espagnol" value="jeu">Jeu</option>
-					    	<option data-placeholder="Une expérience du canada" value="langue">Langue</option>
-					    	<option data-placeholder="Un cours rapide de tricot" value="voyage">Voyage</option>
-					    	<option data-placeholder="Une partie de crapette" value="initiation">Initiation</option>
-					    	<option data-placeholder="Une recette" value="recette">Recette</option>
-					    	<option data-placeholder="Découvrir le métier de physicien" value="experience">Expérience profesionnelle</option>
-					    </select>
-				    </div>
+			    <h2><label for="your-proposal">Je propose</label></h2>
+			    
+			    <p class="note">
+			    	Faites comme Annabelle, <br />
+			    	proposez votre expérience du Canada
+			    </p>
+
+			    <select class="span3 domain" id="your-proposal" name="your-proposal">		    		
+			    	<option value="-1">Dans le domaine...</option>
+			    	<option data-placeholder="Une conversation en espagnol" value="langue">Langue</option>
+			    	<option data-placeholder="Une expérience du canada" value="voyage">Voyage</option>
+			    	<option data-placeholder="Une partie de crapette" value="jeu">Jeu</option>
+			    	<option data-placeholder="Un cours rapide de tricot" value="initiation">Initiation</option>
+			    	<option data-placeholder="Une recette" value="recette">Recette</option>
+			    	<option data-placeholder="Découvrir le métier de physicien" value="experience">Expérience profesionnelle</option>
+			    </select>
+
+			    <div id="proposal-container" class="hide js-proposal content">
+			    	<input type="text" class="text span3" id="your-proposal-input" name="content-proposal" />
 			    </div>
 
-			    <div class="control-group">
-				    
-				    <div id="proposal-container" class="controls hide js-proposal content">
-				    	<input type="text" class="text span3" id="your-proposal-input" name="content-proposal" />
-				    </div>
-
-			    <ul class="my-interests unstyled">
-			    	<?php foreach ($this->proposals as $proposal): ?>
-			    	<li><img src="http://placehold.it/30x25" class="" /><?php echo '<strong>' . $proposal['title'] . '</strong> : ' . $proposal['desc']; ?></li>
-				    <?php endforeach; ?>
-			    </ul>
-
-			    </div>
 
 			</div>
 
 
+			<div class="span12">
+				<button class="submit OK" type="submit">OK</button>
+			</div>
+
 	    </fieldset>
 
-	    <div class="form-actions">
-	    	<button class="btn btn-primary" type="submit">Connectez vous avec Facebook</button>
-	    	<a class="btn" href="/user/trajet">Revenir aux trajets</a>
-	    </div>
+
 	</form>
 </div>

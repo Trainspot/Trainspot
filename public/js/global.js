@@ -73,31 +73,31 @@ $(window).load(function() {
 					.find(".content")
 						.show()
 						.find(":input[type=text]")
-							.attr("placeholder", $(this).find(":selected").data("placeholder") )
-							.keydown(function(e) {
-								if (e.keyCode == 13)
-								{
-									if ($('#your-proposal-input').val() != '' && $('#your-need-input').val() != '')
-									{
-										$.ajax({
-											url: '/user/interest',
-											type: 'post',
-											data: 'titleproposal=' + $('#your-proposal').val() + '&proposal=' + $('#your-proposal-input').val() + '&titleneed=' + $('#your-need').val() + '&need=' + $('#your-need-input').val(),
-											success:function(data) {
-												$('#proposal-container, #need-container').fadeOut('fast');
-												window.location.href = '/user/interest';
-											}
-										});
-									}
-									else
-									{
-										alert('Pour chaque choses que vous cherchez, vous devez proposer autres choses en contre partie')
-									}
-								return false;
-								}
-							})
+							.attr("placeholder", $(this).find(":selected").data("placeholder") );
 			}
 
+		});
+
+		$(".js-interest").on("submit", function(event) {
+
+			if ($('#your-proposal-input').val() != '' &&  $('#your-need-input').val() != '') {
+
+				$.ajax({
+					url: '/user/interest',
+					type: 'post',
+					data: 'titleproposal=' + $('#your-proposal').val() + '&proposal=' + $('#your-proposal-input').val() + '&titleneed=' + $('#your-need').val() + '&need=' + $('#your-need-input').val(),
+					success:function(data) {
+						$('#proposal-container, #need-container').fadeOut('fast');
+						window.location.href = '/user/interest';
+					}
+				});
+
+			} else {
+				alert('Pour chaque choses que vous cherchez, vous devez proposer autres choses en contre partie')
+			}
+
+			event.preventDefault();
+			return false;
 		});
 	}
 
