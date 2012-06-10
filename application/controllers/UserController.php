@@ -92,7 +92,7 @@ class UserController extends Zend_Controller_Action
                         'id_user' => Zend_Auth::getInstance()->getIdentity()->id_user,
                         'time_depart' => $timestamp
                     ));
-                $this->_redirect('/user/interest');
+                $this->_redirect('/user/');
             }
         }
     }
