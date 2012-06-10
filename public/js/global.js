@@ -108,7 +108,7 @@ $(window).load(function() {
 		bindEvents();
 
 		// Initialize the slide
-		$(".js-slider").µSlide({child_class: ".slide"});
+		$(".js-slider").µSlide({child_class: ".slide", leftOffset: -1 * ( $(window).width() - 960 ) / 2  });
 
 	})();
 
