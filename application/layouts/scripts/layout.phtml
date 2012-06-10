@@ -6,7 +6,7 @@
     <head>
 
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<meta name="viewport" content="width=device-width,initial-scale=1">
+	   <meta name="viewport" content="width=device-width,initial-scale=1">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
 
         
@@ -116,37 +116,43 @@
         <?php echo $this->layout()->content; ?>
 
         <footer class="container">
-            <div class="pull-right">
-                <script charset="utf-8" src="http://widgets.twimg.com/j/2/widget.js"></script>
-                <script>
-                new TWTR.Widget({
-                  version: 2,
-                  type: 'search',
-                  search: '@_trainspot_',
-                  interval: 30000,
-                  title: '',
-                  subject: '@_TrainSpot_',
-                  width: 250,
-                  height: 150,
-                  theme: {
-                    shell: {
-                      background: '#991358',
-                      color: '#ffffff'
-                    },
-                    tweets: {
-                      background: '#ffffff',
-                      color: '#444444',
-                      links: '#991358'
-                    }
-                  },
-                  features: {
-                    scrollbar: false,
-                    loop: false,
-                    live: true,
-                    behavior: 'all'
-                  }
-                }).render().start();
-                </script>
+            <div class="row">
+                <div class="span8 offset1">
+                    <h3>Trainspot</h3>
+                    <a href="/developers">API</a> | <a href="https://twitter.com/#!/_trainspot_">Twitter</a> | <a href="https://www.facebook.com/trainspotFR">Facebook</a> | <a href="https://github.com/Trainspot/Trainspot/">GitHub</a>
+                </div>
+                <div class="span3">
+                    <script charset="utf-8" src="http://widgets.twimg.com/j/2/widget.js"></script>
+                    <script>
+                    new TWTR.Widget({
+                      version: 2,
+                      type: 'search',
+                      search: '@_trainspot_',
+                      interval: 30000,
+                      title: '',
+                      subject: '@_TrainSpot_',
+                      width: 250,
+                      height: 150,
+                      theme: {
+                        shell: {
+                          background: '#991358',
+                          color: '#ffffff'
+                        },
+                        tweets: {
+                          background: '#ffffff',
+                          color: '#444444',
+                          links: '#991358'
+                        }
+                      },
+                      features: {
+                        scrollbar: false,
+                        loop: false,
+                        live: true,
+                        behavior: 'all'
+                      }
+                    }).render().start();
+                    </script>
+                </div>
             </div>
         </footer>
 
