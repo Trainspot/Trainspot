@@ -16,6 +16,7 @@ $(document).ready(function() {
 					alert('Erreur : message non envoyé');
 			}
 		})
+		return false;
 	});
 })
 </script>
@@ -23,15 +24,10 @@ $(document).ready(function() {
 	<h1>Contacter l'utilisateur par SMS</h1>
 	<form id="contact-form" action="#">
 		<input type="hidden" name="id" value="<?php echo $this->iduser; ?>" />
-		<textarea name="message" style="width: 50%">Bonjour,
-Je suis intéressé pour vous rencontrer à <?php echo $this->gare; ?> pour le sujet suivant : <?php echo $this->theme ?>
-
-Cordialement,
+		<textarea onkeyup="this.value = this.value.slice(0, 140)" onchange="this.value = this.value.slice(0, 140)" name="message" style="width: 50%; height: 100px"><?php echo Zend_Auth::getInstance()->getIdentity()->firstname . ' ' . Zend_Auth::getInstance()->getIdentity()->lastname; ?> aimerait vous rencontrer pour : <?php echo $this->theme ?> à <?php echo $this->gare; ?>
 
 --
-<?php echo Zend_Auth::getInstance()->getIdentity()->lastname . ' ' . Zend_Auth::getInstance()->getIdentity()->firstname; ?>
-<?php echo Zend_Auth::getInstance()->getIdentity()->phone; ?>
-</textarea>
+tel: <?php echo Zend_Auth::getInstance()->getIdentity()->phone; ?></textarea>
 		<button>Envoyer</button>
 	</form>	
 </div>
