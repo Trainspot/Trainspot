@@ -21,16 +21,14 @@
 				    </div>
 			    </div>
 
-			    <div class="controls hide js-need content">
-			    	<input type="text" class="text span3" name="content-need" />
+			    <div id="need-container" class="controls hide js-need content">
+			    	<input type="text" class="text span3" id="your-need-input" name="content-need" />
 			    </div>
 
 			    <ul class="my-interests unstyled">
-			    	<li><img src="http://placehold.it/30x25" class="" /> Lorem ipsum dolor si amet</li>
-			    	<li><img src="http://placehold.it/30x25" class="" /> Lorem ipsum dolor si amet</li>
-			    	<li><img src="http://placehold.it/30x25" class="" /> Lorem ipsum dolor si amet</li>
-			    	<li><img src="http://placehold.it/30x25" class="" /> Lorem ipsum dolor si amet</li>
-			    	<li><img src="http://placehold.it/30x25" class="" /> Lorem ipsum dolor si amet</li>
+			    	<?php foreach ($this->needs as $need): ?>
+			    	<li><img src="http://placehold.it/30x25" class="" /><?php echo '<strong>' . $need['title'] . '</strong> : ' . $need['desc']; ?></li>
+				    <?php endforeach; ?>
 			    </ul>
 
 			</div>
@@ -55,9 +53,15 @@
 
 			    <div class="control-group">
 				    
-				    <div class="controls hide js-proposal content">
-				    	<input type="text" class="text span3" name="content-proposal" />
+				    <div id="proposal-container" class="controls hide js-proposal content">
+				    	<input type="text" class="text span3" id="your-proposal-input" name="content-proposal" />
 				    </div>
+
+			    <ul class="my-interests unstyled">
+			    	<?php foreach ($this->proposals as $proposal): ?>
+			    	<li><img src="http://placehold.it/30x25" class="" /><?php echo '<strong>' . $proposal['title'] . '</strong> : ' . $proposal['desc']; ?></li>
+				    <?php endforeach; ?>
+			    </ul>
 
 			    </div>
 

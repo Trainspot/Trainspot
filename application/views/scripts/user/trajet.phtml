@@ -14,13 +14,13 @@ $('document').ready(function() {
 		    <div class="control-group">
 			    <label class="control-label" for="gare-depart">Gare de départ&nbsp;:</label>
 			    <div class="controls">
-				    <input type="text" class="text span3" id="gare-depart" name="gare-depart">				    
+				    <input type="text" class="text span3" id="gare-depart" name="gare-depart" value="<?php echo $this->gare_depart; ?>">				    
 			    </div>
 		    </div>
 		    <div class="control-group">
 			    <label class="control-label" for="gare-arrivee">Gare d'arrivée&nbsp;:</label>
 			    <div class="controls">
-				    <input type="text" class="text span3" id="gare-arrivee" name="gare-arrivee">				    
+				    <input type="text" class="text span3" id="gare-arrivee" name="gare-arrivee" value="<?php echo $this->gare_arrivee; ?>">
 			    </div>
 		    </div>
 
@@ -42,26 +42,27 @@ $('document').ready(function() {
 			    		<option value="all">tous les jours</option>
 			    	</select>
 			    </div>
-		    </div>		
+		    </div>
 
 		    <div class="control-group js-date">
 			    <label class="control-label" for="date">Date&nbsp;:</label>
 			    <div class="controls">    
-			    	<input type="input" class="text input-small datepicker" />
+			    	<input type="input" class="text input-small datepicker" value="" />
 			    </div>
 		    </div>		
 
 		    <div class="control-group">
+
 			    <label class="control-label" for="depart-hour">Heure de départ&nbsp;:</label>
 			    <div class="controls">
 			    	<select name="depart-hour" id="depart-hour" class="input-small">
 			    		<?php for($i=0; $i<=23; $i++) : ?>
-			    			<option value="<?=$i?>"><?=$i?></option>
+			    			<option <?php echo ($i == date('H', intval($this->time_depart))) ? 'selected="selected" ' : ''; ?>value="<?=$i?>"><?=$i?></option>
 			    		<?php endfor; ?>
 			    	</select>		
 			    	<select name="depart-min" id="depart-min" class="input-small">
 			    		<?php for($i=0; $i<=59; $i++) : ?>
-			    			<option value="<?=$i?>"><?=$i?></option>
+			    			<option <?php echo ($i == date('i', intval($this->time_depart))) ? 'selected="selected" ' : ''; ?>value="<?=$i?>"><?=$i?></option>
 			    		<?php endfor; ?>
 			    	</select>	    
 			    </div>

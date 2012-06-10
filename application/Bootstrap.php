@@ -3,6 +3,7 @@
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 
     public function run() {
+        date_default_timezone_set('Europe/Paris');
         Zend_Registry::set('config', new Zend_Config($this->getOptions()));
         Zend_Registry::set('user_target', array());
         parent::run();
