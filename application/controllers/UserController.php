@@ -212,7 +212,9 @@ class UserController extends Zend_Controller_Action
             $gare_arrivee = $sncf->prepareAutocomplete($my['gare_arrivee']);
 
             $t = $travel->fetchAll($travel->select()->where('id_user != ?', Zend_Auth::getInstance()->getIdentity()->id_user));
-           $train = $sncf->searchTrains($gare_depart[0][1], $gare_arrivee[0][1], $my['time_depart']);
+            $train = $sncf->searchTrains($gare_depart[0][1], $gare_arrivee[0][1], $my['time_depart']);
+            if (empty($train['VehicleJourney']))
+                $this->_redirect('/user/trajet');
             $train = $train['VehicleJourney'][0];
             $mytimes = $sncf->searchDepartArrival($train, $gare_depart[0][1], $gare_arrivee[0][1]);
             $results = array();
