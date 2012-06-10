@@ -177,11 +177,86 @@ class UserController extends Zend_Controller_Action
         }            
     }
 
+    public function matchingAction() {
+        if ( ! Zend_Auth::getInstance()->hasIdentity())
+            $this->_redirect('/');
+
+        require_once '../application/services/Sncf.php';
+        require_once '../application/models/tables/Travel.php';
+        $travel = new Travel();
+        $sncf = new Sncf();
+
+        $my = $travel->fetchAll($travel->select()->where('id_user = ?', Zend_Auth::getInstance()->getIdentity()->id_user))->current();
+        if ($my)
+        {
+            $gare_depart = $sncf->prepareAutocomplete($my['gare_depart']);
+            $gare_arrivee = $sncf->prepareAutocomplete($my['gare_arrivee']);
+
+            $t = $travel->fetchAll($travel->select()->where('id_user != ?', Zend_Auth::getInstance()->getIdentity()->id_user));
+           $train = $sncf->searchTrains($gare_depart[0][1], $gare_arrivee[0][1], $my['time_depart']);
+            $train = $train['VehicleJourney'][0];
+            $mytimes = $sncf->searchDepartArrival($train, $gare_depart[0][1], $gare_arrivee[0][1]);
+            $results = array();
+            foreach($t as $tr)
+            {
+                $gare_depart_other = $sncf->prepareAutocomplete($tr['gare_depart']);
+                $gare_arrivee_other = $sncf->prepareAutocomplete($tr['gare_arrivee']);
+
+                $trainother = $sncf->searchTrains($gare_depart_other[0][1], $gare_arrivee_other[0][1], $tr['time_depart']);
+                $trainother = $trainother['VehicleJourney'][0];
+                $timesother = $sncf->searchDepartArrival($trainother, $gare_depart_other[0][1], $gare_arrivee_other[0][1]);
+
+                if ($mytimes['depart'] > $timesother['depart'])
+                {
+                    $garerencontre = $gare_depart[0][1];
+                    $trainrencontre = $trainother;
+                    $timerencontre = $mytimes['depart'];
+                    $garerencontrecomplet = $gare_depart[0];
+                }
+                else
+                {
+                    $garerencontre = $gare_depart_other[0][1];
+                    $trainrencontre = $train;
+                    $timerencontre = $timesother['depart'];
+                    $garerencontrecomplet = $gare_depart_other[0];
+                }
+
+                if ($sncf->searchTravel($trainrencontre, $garerencontre, $timerencontre))
+                {
+                    require_once '../application/models/tables/Topic.php';
+                    require_once '../application/models/tables/User.php';
+                    $user = new User();
+                    $interest = new Topic();
+                    $int = $interest->fetchAll($interest->select()->where('id_user = ?', $tr['id_user']));
+                    $results[] = array(
+                        'user' => $user->getById($tr['id_user']),
+                        'gare_depart' => $gare_depart,
+                        'gare_arrivee' => $gare_arrivee,
+                        'times'     => $mytimes,
+                        'interest' => $int,
+                        'gare_rencontre' => $garerencontrecomplet,
+                        'time_rencontre' => $timerencontre,
+                        'train_rencontre' => $trainrencontre
+                    );
+                }
+            }
+            $this->view->results = $results;
+            if ($this->_getParam('type') == 'json')
+                die(Zend_Json::encode($results));
+        }
+        else
+        {
+            $this->_redirect('/user/trajet');
+        }
+
+    }
 
     /**
      * action body
      */
     public function interestAction() {
+        if ( ! Zend_Auth::getInstance()->hasIdentity())
+            $this->_redirect('/');
         require_once '../application/models/tables/Topic.php';
         $topic = new Topic();
 

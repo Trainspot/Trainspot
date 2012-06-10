@@ -21,7 +21,7 @@ class User extends Zend_Db_Table_Abstract {
             return false;
         $data = $this->fetchAll(
                 $this->select()
-                     ->where('iduser = ?', $id))->current();
+                     ->where('id_user = ?', $id))->current()->toArray();
         return $data;
     }
   
