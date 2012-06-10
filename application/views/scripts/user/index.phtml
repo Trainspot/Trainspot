@@ -11,7 +11,9 @@
 			<div>
 				<p><strong><?=$user_db->firstname?> <?=$user_db->lastname?></strong></p>
 				<p><?= UserController::getAge($user_db) ?> ans</p>
-				<p><?= $user_fb->bio ?></p>
+				<?php if( isset($user_fb->bio) ) : ?>
+					<p><?= $user_fb->bio ?></p>
+				<?php endif; ?>
 			</div>
 		</div>
 
