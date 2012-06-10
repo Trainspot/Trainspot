@@ -1,28 +1,35 @@
 <script type="text/javascript">
 
+<<<<<<< HEAD
 	function callbackFacebook() {
 
 	    wsh.exec('_facebook -me', function(json) {
 	    	
 	    	setCookie("fb_user", JSON.stringify(json.data) );
 
-			$.ajax({
-				url: '/user/fbme',
-				data: 'mail=' + json.data.email,
-				success: function(data) {
-					if (data == 'ok') {
-						window.location.href = '/setup';
-					} else {
-						$('div#connect, .home-slider').slideUp('fast')
-						$('#register').slideDown('fast')
-						$('#register_nom').val(json.data.last_name)
-						$('#register_prenom').val(json.data.first_name)
-						$('#register_date_birth').val(json.data.birthday)
-						$('#register_mail').val(json.data.email)
+    		wsh.exec('_facebook -me', function(json) {
+				$.ajax({
+					url: '/user/fbme',
+					data: 'mail=' + json.data.email,
+					success: function(data) {
+						if (data == 'ok')
+						{
+							window.location.href = '/user/setup';
+						}
+						else
+						{
+							$('div#connect, .home-slider').slideUp('fast')
+							$('#register').slideDown('fast')
+							$('#register_nom').val(json.data.last_name)
+							$('#register_prenom').val(json.data.first_name)
+							$('#register_date_birth').val(json.data.birthday)
+							$('#register_mail').val(json.data.email)
+						}
 					}
-				}
+				});
 			});
-		});
+			
+    	});
 	}
 
 	$(document).ready(function() {

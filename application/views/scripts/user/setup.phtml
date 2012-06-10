@@ -1,7 +1,15 @@
+<script type="text/javascript">
+$('document').ready(function() {
+	$('#gare-depart, #gare-arrivee').autocomplete({
+		source: "/user/autocompletegare",
+		minLength: 1,
+	})
+})
+</script>
 <div class="container">
-	<form class="form-horizontal js-setup" method="POST">
+	<form class="form-horizontal js-setup" action="/user/setup" method="POST">
 	    <fieldset class="row">
-		    <legend>Ajouter un trajet</legend>
+		    <legend>Quel est votre trajet ?</legend>
 
 		    <div class="control-group">
 			    <label class="control-label" for="gare-depart">Gare de départ&nbsp;:</label>
@@ -46,12 +54,12 @@
 		    <div class="control-group">
 			    <label class="control-label" for="depart-hour">Heure de départ&nbsp;:</label>
 			    <div class="controls">
-			    	<select name="depart-hour" class="input-small">
+			    	<select name="depart-hour" id="depart-hour" class="input-small">
 			    		<?php for($i=0; $i<=23; $i++) : ?>
 			    			<option value="<?=$i?>"><?=$i?></option>
 			    		<?php endfor; ?>
 			    	</select>		
-			    	<select name="depart-min" class="input-small">
+			    	<select name="depart-min" id="depart-min" class="input-small">
 			    		<?php for($i=0; $i<=59; $i++) : ?>
 			    			<option value="<?=$i?>"><?=$i?></option>
 			    		<?php endfor; ?>
@@ -59,7 +67,7 @@
 			    </div>
 		    </div>
 
-		    <div class="control-group">
+<!-- 		    <div class="control-group">
 			    <label class="control-label" for="heure-arrivee">Heure d'arrivée&nbsp;:</label>
 			    <div class="controls">
 			    	<select name="arrivee-hour" class="input-small">
@@ -73,11 +81,10 @@
 			    		<?php endfor; ?>
 			    	</select>			    
 			    </div>
-		    </div>
+		    </div> -->
 
 		    <div class="form-actions">
 		    	<button class="btn btn-primary" type="submit">Suivant</button>
-		    	<button class="btn">Ajouter un autre trajet</button>
 		    </div>
 
 	    </fieldset>
