@@ -51,16 +51,16 @@
 		<div class="js-slider">
 			<ul class="js-wrapper">
 				<li class="slide">
-					<img src="http://placehold.it/960x400" />
+					<img src="/img/slide-1.png" />
 				</li>
 				<li class="slide">
-					<img src="http://placehold.it/960x400" />
+					<img src="/img/slide-2.png" />
 				</li>
 				<li class="slide">
-					<img src="http://placehold.it/960x400" />
+					<img src="/img/slide-3.png" />
 				</li>
 				<li class="slide">
-					<img src="http://placehold.it/960x400" />
+					<img src="/img/slide-4.png" />
 				</li>
 			</ul>
 		</div>
@@ -81,11 +81,13 @@
 
 	<div class="signin">
 		<p><strong>TrainSpot</strong> vous permet d'échanger avec les voyageurs qui partagent votre trajet quotidien</p>
-		<div id="connect" style="text-align: center; margin-top: 10px">
-			<a href="#" class="btn btn-primary">
-				Connectez vous avec Facebook
-			</a>
-		</div>
+		<?php if( ! Zend_Auth::getInstance()->hasIdentity() ) : ?>
+			<div id="connect" style="text-align: center; margin-top: 10px">
+				<a href="#" class="btn btn-primary btn-large">
+					Connectez vous avec Facebook
+				</a>
+			</div>
+		<?php endif; ?>
 	</div>
 
 	<div id="register" style="display: none">
