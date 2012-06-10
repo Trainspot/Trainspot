@@ -1,22 +1,49 @@
-<div style="width: 80%; margin-left: 10%;">
-	<?php $i = 0; ?>
-	<?php foreach($this->results as $result): ?>
-		<?php foreach ($result['interest'] as $interest): ?>
+<div class="container">
 
-		<div style="cursor: pointer;<?php if ($i++ % 2 == 0) echo ' background-color: #EEE' ?>">
-			<a style="color: inherit; text-decoration: none;" href="/user/contact?id=<?php echo $result['user']['id_user'] ?>&theme=<?php echo urlencode($interest['title'] . ' : ' . $interest['desc']); ?>&gare=<?php echo urlencode($result['gare_rencontre'][0]); ?>">
-			<table style="width: 100%">
-				<tr>
-					<td><?php echo $result['user']['firstname'] . ' ' . $result['user']['lastname']; ?></td>
-					<td <?php echo ($interest['need_proposal'] == 0 ? '' : ' style="position: relative; left: 38px;"') ?>><?php echo ($interest['need_proposal'] == 0 ? '<img src="/img/pic-want.png" />Propose' : '<img src="/img/pic-need.png" />Recherche') ?><br /></td>
-					<td style="width: 10%"><?php echo 'Rencontre à ' . $result['gare_rencontre'][0]; ?></td>
-				</tr>
-			</table>
-			<div style="text-align: center">
-				<strong><?php echo $interest['title'] . '</strong> : ' . $interest['desc']; ?>
-			</div>
-			</a>
-		</div>
+	<div class="matching">
+
+		<?php $i = 0; ?>
+		<?php foreach($this->results as $result): ?>
+
+			<?php foreach ($result['interest'] as $interest): ?>
+
+				<div class="line">
+					<div class="row">
+						<div class="span3">
+							<?php echo $result['user']['firstname'] . ' ' . $result['user']['lastname']; ?>
+						</div>
+
+						<div class="span3">
+							<?php 
+								echo $interest['need_proposal'] == 0 ? 
+									'<img src="/img/pic-want.png" />Propose'
+									: 
+
+									'<img src="/img/pic-need.png" />Recherche';
+							?>
+						</div>
+								
+						<div class="span2">
+							<?php echo 'Rencontre à ' . $result['gare_rencontre'][0]; ?>
+						</div>
+
+						<div class="span2">
+							<strong><?php echo $interest['title'] . '</strong> : ' . $interest['desc']; ?>
+						</div>
+
+						<div class="span1">
+							<a style="color: inherit; text-decoration: none;" 
+					   		   href="/user/contact?id=<?php echo $result['user']['id_user'] ?>&theme=<?php echo urlencode($interest['title'] . ' : ' . $interest['desc']); ?>&gare=<?php echo urlencode($result['gare_rencontre'][0]); ?>">
+					   		   contact
+					   		</a>
+						</div>
+					</div>
+				</div>
+			
+			<?php endforeach; ?>
+
 		<?php endforeach; ?>
-	<?php endforeach; ?>
+
+	</div>
+
 </div>

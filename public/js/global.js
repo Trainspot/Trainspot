@@ -88,7 +88,7 @@ $(window).load(function() {
 					data: 'titleproposal=' + $('#your-proposal').val() + '&proposal=' + $('#your-proposal-input').val() + '&titleneed=' + $('#your-need').val() + '&need=' + $('#your-need-input').val(),
 					success:function(data) {
 						$('#proposal-container, #need-container').fadeOut('fast');
-						window.location.href = '/user/interest';
+						window.location.href = '/user/';
 					}
 				});
 
