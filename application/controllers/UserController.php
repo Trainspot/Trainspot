@@ -30,7 +30,7 @@ class UserController extends Zend_Controller_Action
         if ( ! Zend_Auth::getInstance()->hasIdentity())
             $this->_redirect('/');
 
-        
+
 
         if ($this->getRequest()->isPost())
         {
@@ -59,7 +59,7 @@ class UserController extends Zend_Controller_Action
                     'flexible' => (($this->_getParam('regulier', 0) != 0) ? 1 : 0),
                     'id_user' => Zend_Auth::getInstance()->getIdentity()->id_user
                 ));
-                $this->_redirect('/interest');
+                $this->_redirect('/user/interest');
             }
         }
     }
@@ -154,7 +154,7 @@ class UserController extends Zend_Controller_Action
     /**
      * action body
      */
-    public function profilAction() {
+    public function indexAction() {
 
     }
 }
