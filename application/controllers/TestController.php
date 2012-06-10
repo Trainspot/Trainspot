@@ -67,5 +67,14 @@ class TestController extends Zend_Controller_Action
         var_dump($res);
         die();
     }
+
+    public function clearcache()
+    {
+        $cache = Zend_Registry::get('cache');
+
+        $cache->clean(Zend_Cache::CLEANING_MODE_ALL);
+
+        die("c'est bon");
+    }
 }
 ?>

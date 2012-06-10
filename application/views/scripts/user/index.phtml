@@ -1,0 +1,30 @@
+<div class="container user">	
+	<div class="row">
+		<?php $user_fb = json_decode(utf8_encode($_COOKIE["fb_user"])); ?>
+		<?php $user_db = Zend_Auth::getInstance()->getIdentity(); ?>
+
+		<div class="span5 card">
+			<div class="avatar pull-left">			
+				<img src="https://graph.facebook.com/<?=$user_fb->id?>/picture?type=normal" alt="avatar" />
+			</div>
+
+			<div>
+				<p><strong><?=$user_db->firstname?> <?=$user_db->lastname?></strong></p>
+				<p><?= UserController::getAge($user_db) ?> ans</p>
+				<p><?= $user_fb->bio ?></p>
+			</div>
+		</div>
+
+		<div class="span7 interests">
+			<a class="list" href="/user/interest">
+				<span class="badge">1</span>  Que voullez vous partager ?
+			</a>
+		</div>
+
+		<div class="span12 trajets">
+			<a class="list" href="/user/trajet">
+				<span class="badge">2</span> Quels sont vos trajets ?
+			</a>
+		</div>
+	</div>
+</div>
