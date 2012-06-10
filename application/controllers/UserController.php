@@ -97,6 +97,22 @@ class UserController extends Zend_Controller_Action
         }
     }
 
+    public function signoutAction() {
+        $authInstance = Zend_Auth::getInstance();
+        if (!$authInstance->hasIdentity()) {
+            $result = array(
+                'error' => true,
+            );
+        } else {
+            $result = array(
+                'error' => false,
+                'msg' => 'Vous êtes maintenant déconnecté',
+            );
+            $authInstance->clearIdentity();
+        }
+
+        $this->_redirect('/');
+    }
 
     public function autocompletegareAction() {
         require_once '../application/services/Sncf.php';
