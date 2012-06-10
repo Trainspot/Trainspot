@@ -65,7 +65,12 @@ $(window).load(function() {
 		$(".js-interest").delegate(".domain", "change", function() {
 
 			if( $(this).val() == -1 ) {		
+				
 				$(this).parents(".span6").find(".content").hide();
+				
+				$('#your-proposal-input').val('');
+				$('#your-need-input').val('');
+
 			} else {								
 				// show the content input
 				$(this)
