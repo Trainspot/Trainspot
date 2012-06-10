@@ -1,12 +1,12 @@
 <?php /* todo:
-ok - autocompletion gares -> data
+ok - autocompletion gares 													-> data
 
 later - correspondances/ou pas entre deux gares                             |
 later - correspondances/ou pas entre plusieurs gares (chemin possible ?)    |-> microservices
 
-- départs de trains (sur un trajet) dans une tranche horaire | jours/semaine (dates?) -> microservices
-- ajouter la durée du trajet à la tranche horaire (déterminer la durée avec correspondances) -> microservices
-- rencontre possible entre deux tranches horaires -> ? 
+ok - départs de trains (sur un trajet) dans une tranche horaire | jours/semaine (dates?)      |
+- ajouter la durée du trajet à la tranche horaire (déterminer la durée avec correspondances)  |-> microservices
+- rencontre possible entre deux tranches horaires                                             |  
 */
 
 
@@ -14,6 +14,7 @@ class Sncf
 {
 	private $_timespan = 600;
 
+	// returns [name, uic, lat, lng, ligne]
 	private function getGares()
 	{
 		$cache = Zend_Registry::get('cache');
@@ -76,10 +77,11 @@ var_dump('pl');
 		return array_values($gares);
 	}
 
+	// gare & gare2: stoparea uic; returns vehiclejourneylist
 	public function searchTrains($gare, $gare2, $timestamp, $ponctual = false)
 	{
 		$cache = Zend_Registry::get('cache');
-        $cache_id = 'sncf_searchtrain_' . $timestamp . '_' . $gare[1] . $gare2[1] . $ponctual;
+        $cache_id = 'sncf_searchtrain_' . $timestamp . '_' . $gare . $gare2 . $ponctual;
         if ( ! ($data = $cache->load($cache_id)))
         {
         	$timestart = date('H|i', $timestamp - $this->_timespan);
@@ -94,7 +96,7 @@ var_dump('pl');
 
             require_once APPLICATION_PATH . '/../library/Webshell.php';
 			$webshell = Webshell::getInstance();
-			$res = Zend_Json::decode($webshell->exec('@sncf vehiclejourneylist -Action VehicleJourneyList -StopAreaExternalCode "' . $gare[1] . ';' . $gare2[1] . '|and" -StartTime "' . $timestart . '" -EndTime "' . $timeend . '"' . $extra));
+			$res = Zend_Json::decode($webshell->exec('@sncf vehiclejourneylist -Action VehicleJourneyList -StopAreaExternalCode "' . $gare2 . ';' . $gare . '|and" -StartTime "' . $timestart . '" -EndTime "' . $timeend . '"' . $extra));
 			$data = $res[0]['data']['ActionVehicleJourneyList']['VehicleJourneyList'];
 
             $cache->save($data, $cache_id, array('gare'));
@@ -102,16 +104,52 @@ var_dump('pl');
         return $data;
 	}
 
-	public function searchTravel($travel, $from)
+	// travel: vehiclejourney, from & to: stoparea uic
+	public function searchDepartArrival($travel, $from, $to)
 	{
-
+		$stops = $travel['StopList']['Stop'];
+		$result = array();
+		foreach ($stops as $stop)
+		{
+			if ($stop['StopPoint']['StopArea']['@attributes']['StopAreaExternalCode'] == $from)
+			{
+				$timestop = $stop["StopArrivalTime"];
+				$timestop = mktime($timestop['Hour'], $timestop['Minute']);
+				$result['arrival'] = $timestop;
+			}
+			elseif ($stop['StopPoint']['StopArea']['@attributes']['StopAreaExternalCode'] == $to)
+			{
+				$timestop = $stop["StopArrivalTime"];
+				$timestop = mktime($timestop['Hour'], $timestop['Minute']);
+				$result['depart'] = $timestop;
+			}
+		}
+		return $result;
 	}
 
-	public function searchTravels($travels, $from)
+	// travel: vehiclejourney, from: stoparea uic
+	public function searchTravel($travel, $from, $timestamp)
+	{
+		$stops = $travel['StopList']['Stop'];
+		foreach ($stops as $stop)
+		{
+			if ($stop['StopPoint']['StopArea']['@attributes']['StopAreaExternalCode'] == $from)
+			{
+				$timestop = $stop["StopArrivalTime"];
+				$timestop = mktime($timestop['Hour'], $timestop['Minute']);
+				$difftime = abs(time() - $timestop);
+				if ($difftime < 60 * 30)
+					return true;
+			}
+		}
+		return false;
+	}
+
+	public function searchTravels($travels, $from, $timestamp)
 	{
 		$results = array();
 		foreach ($travels as $travel)
-			$results[] = $this->searchTravel($travel, $from);
+			$results[] = $this->searchTravel($travel, $from, $timestamp);
 		return $results;
 	}
 
