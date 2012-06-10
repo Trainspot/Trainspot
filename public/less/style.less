@@ -1,7 +1,53 @@
 @import "variables.less";
+@import "./bootstrap/mixins.less";
 
 h1, h2, h3, h4, h5, h6, legend {
 	font-family:'Nunito', sans-serif;
+}
+
+header {
+
+	text-align:center;
+	color:#b6145a;
+
+	h1 {
+		margin:40px auto 20px;
+	}
+
+	h2 {
+		font-size:16px;
+		font-weight:normal;
+		letter-spacing:0.1em;
+	}
+}
+
+.home {
+
+	position:relative;
+	top:0; left:0;
+
+	&:after {
+		position:absolute;
+		top:320px;
+		left:0;
+
+		z-index:-1;
+		content:"";
+
+		width:100%;
+		height:170px;
+
+  		#gradient > .vertical(@white, #c6c5c6);
+	}
+
+	.signin {		
+		text-align:center;
+
+		p {
+			margin:20px 0;
+			font-size:16px;
+		}
+	}
 }
 
 .home-slider {
@@ -15,8 +61,10 @@ h1, h2, h3, h4, h5, h6, legend {
 	overflow:hidden;
 	position:relative;
 	width:960px;
-	height:600px;
+	height:400px;
 
+	margin-bottom:80px;
+	margin-top:50px;
 
 	.js-wrapper {
 
@@ -26,6 +74,7 @@ h1, h2, h3, h4, h5, h6, legend {
 		li {
 			list-style:none;
 			float:left;		
+			//visibility:hidden;
 		}
 	}
 }
@@ -44,16 +93,29 @@ h1, h2, h3, h4, h5, h6, legend {
 		top:50%;
 
 		display:block;
-		background:red;
+		background:transparent;
+
+		display: block;
+		width:26px;
+		height:42px;		
+
+		overflow: hidden;
+		text-indent:-9999px;
+
+		cursor: pointer;
 
 		&.prev {
 			left:0px;
 			right:auto;
+
+			background-image: url("/img/flesh-left.png");
 		}
 
 		&.next {
 			left:auto;
 			right:0px;
+
+			background-image: url("/img/flesh-right.png");
 		}
 	}
 
@@ -61,11 +123,11 @@ h1, h2, h3, h4, h5, h6, legend {
 
 		z-index:20;
 		position:relative;
-		top:270px;
+		top:260px;
 		left:50%;
 
 		width:400px;
-		margin-left:-60px;
+		margin-left:-44px;
 
 		.bullet {
 
@@ -73,15 +135,16 @@ h1, h2, h3, h4, h5, h6, legend {
 			position:relative;
 
 			float:left;
-			width:20px;
-			height:20px;
+			width:12px;
+			height:13px;
 
 			margin-right:10px;
 
-			background:red;
+			background:center center no-repeat url("/img/bullet-vide.png");
+			cursor:pointer;
 
 			&.active {
-				background-color: green;
+				background-image: url("/img/bullet-plein.png");
 			}
 		}
 	}
@@ -96,4 +159,18 @@ h1, h2, h3, h4, h5, h6, legend {
 			margin-right:10px;
 		}
 	}
+}
+
+footer {
+
+	.transition(0.7s);
+
+	opacity:0.6;
+	margin-bottom:30px;
+	margin-top:30px;
+
+	&:hover {
+		opacity:1;
+	}
+
 }

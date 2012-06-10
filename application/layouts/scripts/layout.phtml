@@ -73,7 +73,60 @@
             s.parentNode.insertBefore(g,s)}(document,'script'));
         </script>
 
+        <?php $controllerName = Zend_Controller_Front::getInstance()->getRequest()->getControllerName(); ?>
+
+        <?php if( $controllerName == "index" ) : ?>
+
+           <header>
+                <h1><img alt="Trainspot" src="/img/logo-grd.png" /></h1>
+                <h2>PARTAGER PLUS QUE VOTRE TRAJET</h2>
+            </header>
+
+        <?php else: ?>
+
+            <header class="mini">
+                <h1><img alt="Trainspot" src="/img/logo-pti.png" /></h1>
+            </header>
+
+        <?php endif; ?> 
+
+
         <?php echo $this->layout()->content; ?>
+
+        <footer class="container">
+            <div class="pull-right">
+                <script charset="utf-8" src="http://widgets.twimg.com/j/2/widget.js"></script>
+                <script>
+                new TWTR.Widget({
+                  version: 2,
+                  type: 'search',
+                  search: '@_trainspot_',
+                  interval: 30000,
+                  title: '',
+                  subject: '@_TrainSpot_',
+                  width: 250,
+                  height: 150,
+                  theme: {
+                    shell: {
+                      background: '#991358',
+                      color: '#ffffff'
+                    },
+                    tweets: {
+                      background: '#ffffff',
+                      color: '#444444',
+                      links: '#991358'
+                    }
+                  },
+                  features: {
+                    scrollbar: false,
+                    loop: false,
+                    live: true,
+                    behavior: 'all'
+                  }
+                }).render().start();
+                </script>
+            </div>
+        </footer>
 
     </body>
 </html>
