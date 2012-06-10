@@ -203,6 +203,8 @@ class UserController extends Zend_Controller_Action
                 $gare_arrivee_other = $sncf->prepareAutocomplete($tr['gare_arrivee']);
 
                 $trainother = $sncf->searchTrains($gare_depart_other[0][1], $gare_arrivee_other[0][1], $tr['time_depart']);
+                if (empty($trainother['VehicleJourney']))
+                    continue;
                 $trainother = $trainother['VehicleJourney'][0];
                 $timesother = $sncf->searchDepartArrival($trainother, $gare_depart_other[0][1], $gare_arrivee_other[0][1]);
 
@@ -251,6 +253,25 @@ class UserController extends Zend_Controller_Action
 
     }
 
+    public function contactAction() {
+        if ($this->getRequest()->isPost())
+        {
+            require_once APPLICATION_PATH . '/services/Sms.php';
+            require_once APPLICATION_PATH . '/models/tables/User.php';
+            $sms = new Sms();
+            $id = $this->_getParam('id');
+            $user = new User();
+            $u = $user->getById($id);
+            $sms->sendSms($this->_getParam('message'), $u['phone']);
+            die('ok');
+        }
+        else
+        {
+            $this->view->theme = $this->_getParam('theme');
+            $this->view->gare = $this->_getParam('gare');
+            $this->view->iduser = $this->_getParam('id');            
+        }
+    }
     /**
      * action body
      */

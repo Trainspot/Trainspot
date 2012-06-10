@@ -1,0 +1,37 @@
+<script type="text/javascript">
+$(document).ready(function() {
+	$('#contact-form').submit(function() {
+		var data = $(this).serialize();
+		$.ajax({
+			url: '/user/contact',
+			type: 'post',
+			data: data,
+			success: function(data) {
+				if (data == 'ok')
+				{
+					alert('Message envoyé');
+					window.location.href = '/user';
+				}
+				else
+					alert('Erreur : message non envoyé');
+			}
+		})
+	});
+})
+</script>
+<div style="width: 80%; margin-left: 10%;">
+	<h1>Contacter l'utilisateur par SMS</h1>
+	<form id="contact-form" action="#">
+		<input type="hidden" name="id" value="<?php echo $this->iduser; ?>" />
+		<textarea name="message" style="width: 50%">Bonjour,
+Je suis intéressé pour vous rencontrer à <?php echo $this->gare; ?> pour le sujet suivant : <?php echo $this->theme ?>
+
+Cordialement,
+
+--
+<?php echo Zend_Auth::getInstance()->getIdentity()->lastname . ' ' . Zend_Auth::getInstance()->getIdentity()->firstname; ?>
+<?php echo Zend_Auth::getInstance()->getIdentity()->phone; ?>
+</textarea>
+		<button>Envoyer</button>
+	</form>	
+</div>
